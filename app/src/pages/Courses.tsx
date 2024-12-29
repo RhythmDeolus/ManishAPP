@@ -1,10 +1,12 @@
+import useFetchCourses from "../hooks/courses";
+
 export default function Courses() {
+
+  const { courses, loading, error } = useFetchCourses('/api/courses');
+
+
   return (
     <>
-
-
-
-
       <section className="bg-gray-100 py-8 antialiased dark:bg-gray-900 md:py-12">
         <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
           <div className="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
@@ -94,79 +96,68 @@ export default function Courses() {
             </div>
           </div>
           <div className="mb-4 grid gap-4 sm:grid-cols-1 md:mb-8 lg:grid-cols-1 xl:grid-cols-1">
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
 
-              <div className="pt-2">
-
-
-
-
-                <div className="flex items-center justify-between gap-20">
-                  <div>
-                    <a href="#" className="text-3xl font-semibold leading-tight text-gray-700 hover:cursor-pointer dark:text-white">Artifical Inteligence</a>
-                    <div className="text-base text-gray-500 dark:text-white-50">M.Sc./ Part-time / On-Campus</div>
-                  </div>
-                  <div className="flex flex-col justify-end items-end gap-10">
-                    <p className="text-xl font-bold leading-tight text-gray-600 dark:text-gray-300">₹ 4,80,421 / year</p>
-                  </div>
-
-
-
-                </div>
-                <div className="mt-2 flex items-center gap-2">
-                  <div className="flex items-center">
-                    <img className="p-1 w-14 h-14" src="/mit.png" alt="" />
-                  </div>
-
-                  <a className="text-sm font-medium text-gray-600 dark:text-gray-400">Massachusetts Institute of Technology</a>
-                  <a className="text-sm font-medium text-gray-600 dark:text-gray-400">(United States)</a>
-                </div>
-
-                <div className="mt-4 flex items-baseline justify-between gap-4">
-                  <ul className="mt-2 flex items-center align-bottom gap-4">
-                    <li className="flex items-center gap-2" data-tooltip-target="tooltip-course-duration">
-                      <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                      </svg>
-
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">2 years</p>
-                    </li>
-                    <div id="tooltip-course-duration" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                      Duration
-                      <div className="tooltip-arrow" data-popper-arrow></div>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error loading courses</p>}
+            {courses && courses.map((course) => (
+              <div key={course.id} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                <div className="pt-2">
+                  <div className="flex items-center justify-between gap-20">
+                    <div>
+                      <a href="/course/1" className="text-3xl font-semibold leading-tight text-gray-700 hover:cursor-pointer dark:text-white">{course.name}</a>
+                      <div className="text-base text-gray-500 dark:text-white-50">{course.degree_type} / {course.mode} / {course.delivery}</div>
                     </div>
-
-                    <li className="flex items-center gap-2" data-tooltip-target="tooltip-course-apply-date">
-                      <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2Z" clip-rule="evenodd" />
-                      </svg>
-
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Jan 2025</p>
-                    </li>
-                    <div id="tooltip-course-apply-date" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                      Apply date
-                      <div className="tooltip-arrow" data-popper-arrow></div>
+                    <div className="flex flex-col justify-end items-end gap-10">
+                      <p className="text-xl font-bold leading-tight text-gray-600 dark:text-gray-300">₹ {course.yearly_tuition_fee} / year</p>
                     </div>
-
-                    <li className="flex items-center gap-2" data-tooltip-target="tooltip-start-date">
-                      <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd" />
-                      </svg>
-
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Jan 2025</p>
-                    </li>
-                    <div id="tooltip-start-date" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                      Start date
-                      <div className="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex items-center">
+                      <img className="p-1 w-14 h-14" src='mit.png' alt="" />
                     </div>
-
-                  </ul>
-                  <button type="button" className="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                    View Course Information
-                  </button>
+                    <a className="text-sm font-medium text-gray-600 dark:text-gray-400">{course.university_name}</a>
+                    <a className="text-sm font-medium text-gray-600 dark:text-gray-400">({course.country})</a>
+                  </div>
+                  <div className="mt-4 flex items-baseline justify-between gap-4">
+                    <ul className="mt-2 flex items-center align-bottom gap-4">
+                      <li className="flex items-center gap-2" data-tooltip-target="tooltip-course-duration">
+                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{course.duration}</p>
+                      </li>
+                      <div id="tooltip-course-duration" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Duration
+                        <div className="tooltip-arrow" data-popper-arrow></div>
+                      </div>
+                      <li className="flex items-center gap-2" data-tooltip-target="tooltip-course-apply-date">
+                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2Z" clip-rule="evenodd" />
+                        </svg>
+                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{course.apply_date}</p>
+                      </li>
+                      <div id="tooltip-course-apply-date" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Apply date
+                        <div className="tooltip-arrow" data-popper-arrow></div>
+                      </div>
+                      <li className="flex items-center gap-2" data-tooltip-target="tooltip-start-date">
+                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                          <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd" />
+                        </svg>
+                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{course.start_date}</p>
+                      </li>
+                      <div id="tooltip-start-date" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Start date
+                        <div className="tooltip-arrow" data-popper-arrow></div>
+                      </div>
+                    </ul>
+                    <button type="button"  onClick={() => window.location = '/course/1'}className="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                      View Course Information
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
 
           </div>
           <div className="w-full text-center">
@@ -804,103 +795,66 @@ export default function Courses() {
           <div className="space-y-6">
             <div className="space-y-2">
               <h6 className="text-base font-medium text-black dark:text-white">
-                Categories
+                Course Categories
               </h6>
 
               <div className="flex items-center">
-                <input id="tv" type="checkbox" value=""
+                <input id="undergraduate" type="checkbox" value=""
                   className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
 
-                <label htmlFor="tv" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  TV, Audio-Video
+                <label htmlFor="undergraduate" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Undergraduate
                 </label>
               </div>
 
               <div className="flex items-center">
-                <input id="desktop" type="checkbox" value="" checked
+                <input id="postgraduate" type="checkbox" value="" checked
                   className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
 
-                <label htmlFor="dektop" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Desktop PC
+                <label htmlFor="postgraduate" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Postgraduate
                 </label>
               </div>
 
               <div className="flex items-center">
-                <input id="gaming" type="checkbox" value=""
+                <input id="phd" type="checkbox" value=""
                   className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
 
-                <label htmlFor="gaming" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Gaming
+                <label htmlFor="phd" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  PhD
                 </label>
               </div>
 
+            </div>
+
+            <div className="space-y-2">
+              <h6 className="text-base font-medium text-black dark:text-white">
+                Country
+              </h6>
               <div className="flex items-center">
-                <input id="monitors" type="checkbox" value=""
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                <label htmlFor="monitors" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Monitors
+                <input id="usa" type="checkbox" value="USA" className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label htmlFor="usa" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  USA
                 </label>
               </div>
-
               <div className="flex items-center">
-                <input id="laptops" type="checkbox" value=""
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                <label htmlFor="laptops" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Laptops
+                <input id="uk" type="checkbox" value="UK" className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label htmlFor="uk" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  UK
                 </label>
               </div>
-
               <div className="flex items-center">
-                <input id="console" type="checkbox" value="" checked
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                <label htmlFor="console" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Console
+                <input id="canada" type="checkbox" value="Canada" className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label htmlFor="canada" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Canada
                 </label>
               </div>
-
               <div className="flex items-center">
-                <input id="tablet" type="checkbox" value=""
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                <label htmlFor="tablet" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Tablets
+                <input id="australia" type="checkbox" value="Australia" className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label htmlFor="australia" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Australia
                 </label>
               </div>
-
-              <div className="flex items-center">
-                <input id="foto" type="checkbox" value=""
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                <label htmlFor="foto" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Foto
-                </label>
-              </div>
-
-              <div className="flex items-center">
-                <input id="fashion" type="checkbox" value=""
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                <label htmlFor="fashion" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Fashion
-                </label>
-              </div>
-
-              <div className="flex items-center">
-                <input id="books" type="checkbox" value=""
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                <label htmlFor="books" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Books
-                </label>
-              </div>
-
-              <a href="#"
-                className="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline">
-                View all
-              </a>
             </div>
 
             <div className="space-y-2">

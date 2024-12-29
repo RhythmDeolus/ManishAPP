@@ -68,23 +68,23 @@ export default function Universities() {
           </form>
 
         </div>
-        <div className="px-4 py-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 py-2">
           {universities.map((university) => (
             <a
               key={university.name}
-              href={`/universities/${university.id}`}
-              className="flex flex-col items-center m-5 bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+              href={`/courses`}
+              className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
             >
               <div className="flex flex-col justify-between p-4 leading-normal">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {university.name}
-                </h5>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  {university.location}, {university.country}
-                </p>
-                <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                  {university.description}
-                </p>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {university.name}
+          </h5>
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            {university.location}, {university.country}
+          </p>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+            {university.description}
+          </p>
               </div>
             </a>
           ))}
